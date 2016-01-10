@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CommonSenseSoft.Log.InteractionError">
+    <Position X="4.75" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CommonSenseSoft.Log.InteractionError.ErrorsIds" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Error.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAhgAAAAAAAAAAAAAAAAQAABAAABAAAAAA=</HashCode>
+      <FileName>Error.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.Event">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACgAAAAAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Event.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.EventMetadata">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAABAAAAAEAAQAAAAAAAAAAAAAAQAACAAACAA=</HashCode>
+      <FileName>EventMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.Events">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CommonSenseSoft.Log.Events.enuSuccessStatus">
+        <TypeIdentifier>
+          <NewMemberFileName>Events.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAEQEAAQIAAAAAAABgUAgAAAAAAEAAAg=</HashCode>
+      <FileName>Events.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Events" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.EventsMetadata">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAIAAAAAAAAAAACAgBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventsMetadata.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_dicEvents" />
+      <Field Name="_EventCategories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.ExceptionHelper">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>ExceptionHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.Logging">
+    <Position X="7" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CommonSenseSoft.Log.Logging.enuBlankLines" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Logging.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QGAERwCAQi0kgQBgAkCAIECAJQECEAYCA4iCgBEbgFQ=</HashCode>
+      <FileName>Logging.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonSenseSoft.Log.UTILS">
+    <Position X="4.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAFAAAAAAAAAIAAAAQAIA=</HashCode>
+      <FileName>UTILS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CommonSenseSoft.Log.EventCategory">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>EventMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="CommonSenseSoft.Log.IEventsCollector">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAgAAAAAgAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>IEventsCollector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="CommonSenseSoft.Log.LogLevels">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAgIAAAAAAAAgAAAAAAAAAAICAAAEAAAA=</HashCode>
+      <FileName>Logging.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommonSenseSoft.Log.MailPriority">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

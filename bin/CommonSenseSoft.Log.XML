@@ -1,0 +1,1217 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommonSenseSoft.Log</name>
+    </assembly>
+    <members>
+        <member name="T:CommonSenseSoft.Log.ComboBox_LogLevel">
+            <summary>
+            Renders a drop-down of Log Levels
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.ComboBox_LogLevel.IgnoreValueFromRequest">
+            <summary>
+            When used in grid, the grid fails to propagate the UnregisterRequiresControlState further to this control,
+            and has other vierd things happening. Use this property to tell when the value of this control should not be taken from Request
+            Use OnRowDataBound event of the grid to set this property to true if required
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.InteractionError">
+            <summary>
+            Class that helps returning error conditions from subroutines in the way they can be programmatically processed and delivering verbose messages to interactive user at the same time
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.#ctor(CommonSenseSoft.Log.InteractionError.ErrorsIds,System.String)">
+            <summary>
+            Creates new InteractionError object based on one of predefined error ID and description of what has happened
+            </summary>
+            <param name="id">One of predefined IDs</param>
+            <param name="description">Error Description</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.#ctor(System.Int32,System.String)">
+            <summary>
+            Creates new InteractionError object based on arbitrary error ID and description of what has happened
+            </summary>
+            <param name="customID">arbitrary error ID</param>
+            <param name="description">Error Description</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.#ctor">
+            <summary>
+            Creates empty instance of InteractionError
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.#ctor(System.String)">
+            <summary>
+            Creates instance of InteractionError with URL of where the caller should be redirecting
+            </summary>
+            <param name="redirectToURI">URL of where the caller should be redirecting</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.Append(CommonSenseSoft.Log.InteractionError.ErrorsIds,System.String)">
+            <summary>
+            Appends to existing InteractionError
+            </summary>
+            <param name="id">Id of the Error. It replaces existing id only if the existing Id is ErrorsIds.UNINITIALIZED</param>
+            <param name="description">| delimiter is Appended to existing description, followed by value of this parameter</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.InteractionError.Append(CommonSenseSoft.Log.InteractionError)">
+            <summary>
+            Appends to existing InteractionError. It replaces existing id only if the existing Id is ErrorsIds.UNINITIALIZED. | delimiter is Appended to existing description, followed by description property of the appended InteractionError
+            </summary>
+            <param name="anotherError">InteractionError to Append</param>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.Description">
+            <summary>
+            Description of the Error, typically passed to the unteractive user
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.Details">
+            <summary>
+            Often client needs to create a functional Acknowledgement from what is received in this object, but data is needed as array of values later properly joined into DSV that has delimiters and qualifiers escaped.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.CustomID">
+            <summary>
+            When Id property does not have applicable member of enumeration to choose from, any integer number can be used to extend that range
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ID">
+            <summary>
+            Id of the Error as per ErrorsIds enumeration
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.RedirectToURI">
+            <summary>
+            URL to where the caller should be redirecting after receiving this object back
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.InteractionError.ErrorsIds">
+            <summary>
+            Predefined typical Errors to return to caller to take action. No hard rules here, use what you consider applicable.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.UNINITIALIZED">
+            <summary>
+            The ID had not beed initialized, or had been set to this for appended InteractionError's Id to take presedence.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.Exception">
+            <summary>
+            Exception occurred
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.Unauthorized">
+            <summary>
+            Has not been authorised to execute
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.Invalid">
+            <summary>
+            Invalid user input, etc.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.NoValue">
+            <summary>
+            No value had provided by the user
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.DoesNotExist">
+            <summary>
+            What User asked for does not exist
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.AlreadyExists">
+            <summary>
+            What User wanted to create already exists
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.NeedMoreAuthorisation">
+            <summary>
+            Authorised to execute part of code, but not the whole thing
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.TooSmall">
+            <summary>
+            User provided value which is too small
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.TooBig">
+            <summary>
+            User provided value which is too big
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.NotRequired">
+            <summary>
+            User provided something which is not required
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.Warning">
+            <summary>
+            Warning to show to the User even if the operation has succeeded
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.Note">
+            <summary>
+            Note to show to the User
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.InteractionError.ErrorsIds.MultipleValues">
+            <summary>
+            Execution resulted in multiple results where only one had been expected
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.Event">
+            <summary>
+            Class to keep data about event which can be later on logged in a structured manner
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Event.Location">
+            <summary>
+            Usually a 
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Event.EventId">
+            <summary>
+            ID of the event message. Refer to the EventsMetadata.xml file.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Event.EventParams">
+            <summary>
+            Array of values to replace placeholders in the EventMetadata Text.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Event.TimeStamp">
+            <summary>
+            DateTime when the Event was recorded.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.Events">
+            <summary>
+            Events functionality for clients wanting to use Errors, Warnings and Info collected and presented hierarhically.
+            Provides functionality to conclude if the hierarchy suceeded or failed, without using Exceptions, which should be left to their own course.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.TimeStampFormat">
+            <summary>
+            To maintain consistent time format HH:mm:ss.fff
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.GetSuccessStatus(System.Boolean)">
+            <summary>
+            If the owner object is not null or transactional, any successful child object means success, and that goes recursively.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.OwnerObjectNameForReporting">
+            <summary>
+            Name of the object holding the events. The name should be suitable for reporting
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.OwnerObjectId">
+            <summary>
+            Id of the object that holds the events
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.Add(System.Int32,System.String[])">
+            <summary>
+            Adds Event to Events collection
+            </summary>
+            <param name="messageId">Id of the message. The other parts of the message are retreived from resource file by this ID. You need to refer to the file for correct IDs</param>
+            <param name="messageTextReplacementValues">Array of values to replace placeholders in the Text of the EventMetadata.</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.Add(System.Int32)">
+            <summary>
+            Adds Event to Events collection
+            </summary>
+            <param name="messageId">Id of the message. The other parts of the message are retreived from resource file by this ID. You need to refer to the file for correct IDs</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.AddObjectEvents(CommonSenseSoft.Log.IEventsCollector)">
+            <summary>
+            Events object from the object passed to this method gets added to collection of Events collections.
+            These recursive collections allow building a hierarchical tree of Events for later reporting by the top caller object.
+            The method updates properties of the Events object with properties of the passed host object, so that the host did not have to do it itself.
+            </summary>
+            <param name="objectWithEvents">Object to take Events and other properties from.</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.ToString">
+            <summary>
+            Returns hierarchical representation of Events as far as text can go.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.ToString(System.Nullable{System.Diagnostics.EventLogEntryType})">
+            <summary>
+            Returns hierarchical representation of Events as far as text can go.
+            </summary>
+            <param name="entryType">Entry type filter for returned events</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Events.ToString(System.Nullable{System.Diagnostics.EventLogEntryType},System.Byte)">
+            <summary>
+            Returns hierarchical representation of Events as far as text can go.
+            </summary>
+            <param name="entryType">Entry type filter for returned events</param>
+            <param name="recursionDepth">How deep in the recurtion we are.</param>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Events.Exist">
+            <summary>
+            Fastest way to find if any event exists.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Events.ErrorsRecorded">
+            <summary>
+            Fastest way to find if any Error exists. Errors are those which DO NOT allow the transaction proceed.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.Events.enuSuccessStatus">
+            <summary>
+            Success status of the operation. That typically applied to bulk processing of multiple records when some may succeed some not.
+            Not to be confused with System.Diagnostics.EventLogEntryType used in EventsMetadata!!!!!!!!!!!!
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.enuSuccessStatus.Failed">
+            <summary>
+            The operation Failed completely
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.enuSuccessStatus.Succeeded">
+            <summary>
+            The operation Succeeded completely
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Events.enuSuccessStatus.PartiallySucceeded">
+            <summary>
+            The operation Succeeded partially, there had been Failures as well
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.ExceptionHelper">
+            <summary>
+            Helper functions for internal use. Also useful for other Apps
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.ExceptionHelper.IsTransient(System.Exception)">
+            <summary>
+            Determines if this exception is likely to be transient and the cause is likely to go away
+            </summary>
+            <param name="e">Exception to validate</param>
+            <returns>True if looks transient</returns>
+        </member>
+        <member name="T:CommonSenseSoft.Log.frmError">
+            <summary>
+            This form can be reused by Windows applications when showing internal App's exceptions is not a concern.
+            It is also useful for test harnesses, so that you immediately see the errors.
+            This form will show if Logging.Interactive is set to true and the messaqge level is Warnings, Errors or Fatal
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.frmError.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.frmError.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.frmError.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.IEventsCollector">
+            <summary>
+            Any class that wants its callers to take advantage of Events collection, needs to implement this interface.
+            In doing that, the callers can build hierarchy of events collected from downstream objects.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.IEventsCollector.ObjectNameForReporting">
+            <summary>
+            Name of the object holding the events. The name should be suitable for reporting.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.IEventsCollector.Id">
+            <summary>
+            Id of this concrete object instance
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.IEventsCollector.Transactional">
+            <summary>
+            If the object is Transactional, any EventMetadata of Error Type makes the Object Failed to process.
+            If the object is not Transactional, any non-Error EventMetadata makes the Object successfully processed.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.IEventsCollector.Events">
+            <summary>
+            Collection of Events this object holds. The Caller can then extract it using this Interface.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.Logging">
+            <summary>
+            Provides enhanced logging and notification capabilities
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.ApplicationName">
+            <summary>
+            Here the caller may pass the Application name they want to appear in logs.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Exception,System.Boolean,System.String,System.String)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="action">action attempted, that resulted in the exception</param>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
+            </summary>
+            <param name="exceptionMessage">Exception message</param>
+            <param name="throwBack">Should an exception be thrown back into the system?</param>
+            <param name="logFile">Log file if different from globally configured</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception,System.Boolean,System.String)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+            <param name="logFile">Log file. If omitted, logFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception,System.Boolean)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception,System.String,System.Boolean)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception,System.String)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Boolean,System.String)">
+            <summary>
+            This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
+            </summary>
+            <param name="exceptionMessage">Exception message</param>
+            <param name="throwBack">Should an exception be thrown back into the system?</param>
+            <param name="logFile">Log file if different from globally configured</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Boolean)">
+            <summary>
+            This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
+            </summary>
+            <param name="exceptionMessage">Exception message</param>
+            <param name="throwBack">Should an exception be thrown back into the system?</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String)">
+            <summary>
+            This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
+            </summary>
+            <param name="exceptionMessage">Exception message</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.String)">
+            <summary>
+            This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
+            </summary>
+            <param name="exceptionMessage">Exception message</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.Exception,System.Boolean,System.String,System.String)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Exception,System.Boolean,System.String)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="action">action attempted, that resulted in the exception</param>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+            <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Exception,System.Boolean)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="action">action attempted, that resulted in the exception</param>
+            <param name="e">Exception to log</param>
+            <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogException(System.String,System.Exception)">
+            <summary>
+            Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
+            </summary>
+            <param name="action">action attempted, that resulted in the exception</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.RelayException(System.String,System.Exception)">
+            <summary>
+            Throws generic Exception back into stack, adding text specified in action parameter. 
+            Information specific to particular flavour of the exception relayed is passed in exception's description, so do not worry about adding it manually.
+            Useful when logging is not reasonable at this stack level.
+            </summary>
+            <param name="actionFailed">Action that resulted in this exception</param>
+            <param name="e">exception occurred</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.RelayException(System.Exception)">
+            <summary>
+            Throws generic Exception back into stack, adding text specified in action parameter. 
+            Information specific to particular flavour of the exception relayed is passed in exception's description, so do not worry about adding it manually.
+            Useful when an evasive action failed but logging is not reasonable at this stack level.
+            </summary>
+            <param name="e">exception occurred</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.String,CommonSenseSoft.Log.Logging.enuBlankLines,CommonSenseSoft.Log.LogLevels,System.Int32,System.String)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+            <param name="insertBlankLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="messageID">Unique ID of the message. It is required so that the message does not cause Alert more than once in a period configured (AlertResetIntervalMinutes property)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.String,System.Boolean,CommonSenseSoft.Log.LogLevels,System.Int32,System.String)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="messageID">Unique ID of the message. It is required so that the message does not cause Alert more than once in a period configured (AlertResetIntervalMinutes property)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.String,System.Boolean,CommonSenseSoft.Log.LogLevels)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.Boolean,CommonSenseSoft.Log.LogLevels,System.String)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="messageID">Unique ID of the message. It is required so that the message does not cause Alert more than once in a period configured (AlertResetIntervalMinutes property)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.String)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.Boolean)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,CommonSenseSoft.Log.LogLevels)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,CommonSenseSoft.Log.LogLevels,System.Int32)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.Boolean,CommonSenseSoft.Log.LogLevels)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.Boolean,CommonSenseSoft.Log.LogLevels,System.Int32)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,System.Boolean,CommonSenseSoft.Log.LogLevels,System.Int32,System.Boolean)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="includeHttpRequestData">Includes HTTP query and form data along with the message</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.LogMessage(System.String,CommonSenseSoft.Log.LogLevels,System.Int32,CommonSenseSoft.Log.Logging.enuBlankLines)">
+            <summary>
+            Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="insertBlankLines">How you want the blank lines being inserted</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Debug(System.String)">
+            <summary>
+            Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Debug(System.String,System.Int32)">
+            <summary>
+            Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Parameters(System.String)">
+            <summary>
+            Best placed at the top of procedures. Include parameters values still unaffected.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Parameters(System.String,System.Int32)">
+            <summary>
+            Best placed at the top of procedures. Include parameters values still unaffected.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Call(System.String)">
+            <summary>
+            Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Call(System.String,System.Int32)">
+            <summary>
+            Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Info(System.String)">
+            <summary>
+            Log informational message, not related to any particular procedure
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Info(System.String,System.Int32)">
+            <summary>
+            Log informational message, not related to any particular procedure
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Warn(System.String)">
+            <summary>
+            Log a condition that does not constitute an Exception, but still concerning.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Warn(System.String,System.Int32)">
+            <summary>
+            Log a condition that does not constitute an Exception, but still concerning.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Exception(System.String)">
+            <summary>
+            Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Exception(System.String,System.Int32)">
+            <summary>
+            Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
+            </summary>
+            <param name="message">Message text to be logged (and may be sent)</param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Fatal(System.String)">
+            <summary>
+            Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.Fatal(System.String,System.Int32)">
+            <summary>
+            Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
+            </summary>
+            <param name="message"></param>
+            <param name="localLogLevel">Redefines global log level for this particular call</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String,System.String,System.String,System.Text.Encoding,System.Collections.ArrayList)">
+            <summary>
+            Sends plain text SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <param name="cc">;(semicolon) delimited list of Carbon Copy email addresses</param>
+            <param name="bcc">;(semicolon) delimited list of Blind Carbon Copy email addresses (not seen to any recipient)</param>
+            <param name="encoding">The default character set is "us-ascii". You may want UTF8 or something else.</param>
+            <param name="attachments">Array of files to be attached to the message</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority)">
+            <summary>
+            Sends plain text SMTP message using servers configured
+            </summary>
+            <param name="addresses">; or , or | delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String)">
+            <summary>
+            Sends plain text SMTP message using servers configured. Priority is Normal
+            </summary>
+            <param name="addresses">; or , or | delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@)">
+            <summary>
+            Sends plain text SMTP message using servers configured
+            </summary>
+            <param name="addresses">; or , or | delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String,System.String)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <param name="cc">;(semicolon) delimited list of Carbon Copy email addresses</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <param name="cc">;(semicolon) delimited list of Carbon Copy email addresses</param>
+            <param name="bcc">;(semicolon) delimited list of Blind Carbon Copy email addresses (not seen to any recipient)</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <param name="cc">;(semicolon) delimited list of Carbon Copy email addresses</param>
+            <param name="bcc">;(semicolon) delimited list of Blind Carbon Copy email addresses (not seen to any recipient)</param>
+            <param name="encoding">The default character set is "us-ascii". You may want UTF8 or something else.</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.Boolean,System.String,System.String,System.String,System.Text.Encoding,System.String,System.String@)">
+            <summary>
+            Sends SMTP message using servers configured
+            </summary>
+            <param name="addresses">;(semicolon) delimited list of email addresses</param>
+            <param name="subject">Subject of the SMTP message</param>
+            <param name="body">Body of the SMTP message</param>
+            <param name="priority">Priority of the message</param>
+            <param name="useHtmlFormat">Should HTML format be used to render the message?</param>
+            <param name="from">Specify if you want it different from what is configured as AlertsMailAccount</param>
+            <param name="cc">;(semicolon) delimited list of Carbon Copy email addresses</param>
+            <param name="bcc">;(semicolon) delimited list of Blind Carbon Copy email addresses (not seen to any recipient)</param>
+            <param name="encoding">The default character set is "us-ascii". You may want UTF8 or something else.</param>
+            <param name="attachments">Semicolon (;)-delimited string of files to be attached to the message</param>
+            <param name="errors">Error messages returned by the SMTP servers</param>
+            <returns>true if the message had been sent. To get info about any SMTP server failure analyze the errors output parameter</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.InitializeFromAppConfig">
+            <summary>
+            Call this method when starting your application, and all the properties of this class will be initialized based on appSettings section of your App.config or Web.config 
+            The keys you need in your appSettings section should have the same names as properties of this class, case sensitive.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.CheckLogFileSize">
+            <summary>
+            Checks the size of physical Log File against the LogFileSizeThresholdMb setting. Will log a warning if the size has exceeded the threshold.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.CheckProcessMemory">
+            <summary>
+            Checks the process memory. Always Logs it for LogLevels.Information. Also logs it for LogLevels.Warnings when it exceeds mintProcessMemoryThresholdKb
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.GetWebRequestData(System.Web.HttpRequest)">
+            <summary>
+            Returns string of all important data about web request
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.GetAssemblyDirectory">
+            <summary>
+            Returns directory where the executing assembly resides. Useful when storing configs and data in the same directory
+            </summary>
+            <returns>Full path to directory where executing assembly resides</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.AppendChangeTrace(System.String,System.String,System.String)">
+            <summary>
+            Returns Change trace in a standard way with ODBC canonical timestamp and delimiters already cared for.
+            </summary>
+            <param name="existingText">Text which is already there</param>
+            <param name="textToAppend">Text to append in front of existing text</param>
+            <param name="affectingUser">User making the change</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.WriteLineToFileWithExceptionReturned(System.String,System.String)">
+            <summary>
+            Writes a line of text to file. 
+            </summary>
+            <param name="fileName">File path name</param>
+            <param name="text">Text to write</param>
+            <returns>Error message if write to file fails</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.GetAssembliesEngaged">
+            <summary>
+            Renders text of Assemblies engaged by the process, excluding as much as possible .NET assemblies. It is useful for determining whether a problem is caused by assemblies of wrong versions deployed
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.GetInfoSpecificToExceptionType(System.Exception)">
+            <summary>
+            Extracts data specific to particular exception type passed to this method
+            </summary>
+            <param name="e">Exception to extract data from</param>
+            <returns>Text specific to the exception type</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.GetInnerExceptions(System.Exception)">
+            <summary>
+            Extracts inner exceptions from an Exception
+            </summary>
+            <param name="ex">Exception to extract inner exceptions from</param>
+            <returns>String of Inner Exceptions</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.ToShort(System.Object,System.Int16)">
+            <summary>
+            Very tolerant parser into short datatype.
+            </summary>
+            <param name="val">can be null, DBNull.Value, false, true, "", "no", "yes"</param>
+            <param name="defaultValue">Default value to be returned in case of null, DBNull.Value, ""</param>
+            <returns>value interpreted as short, or throws exception if the value is not foreseen</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.ToBoolean(System.Object)">
+            <summary>
+            Very tolerant parser into boolean datatype.
+            </summary>
+            <param name="val">can be null, DBNull.Value, false, true, 0, 1, -1, "", "no", "yes"</param>
+            <returns>value interpreted as true or false, or throws exception if the value is not foreseen</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.ToInt(System.Object,System.Int32)">
+            <summary>
+            Very tolerant parser into int datatype.
+            </summary>
+            <param name="val">can be null, DBNull.Value, false, true, "", "no", "yes"</param>
+            <param name="defaultValue">Default value to be returned in case of null, DBNull.Value, ""</param>
+            <returns>value interpreted as int, or throws exception if the value is not foreseen</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.NullSafe(System.Object)">
+            <summary>
+            Returns empty string if the object is null
+            </summary>
+            <param name="obj">Any object that implements ToString() method</param>
+            <returns>Either cast to string or empty string, without failing on null</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.Logging.CleanCallStack(System.String)">
+            <summary>
+            Cleans Call Stack from information unnecessary for logging
+            </summary>
+            <param name="stackTrace">Call Stack text to clean</param>
+            <returns></returns>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.LogFilePathName">
+            <summary>
+            Full name of log file. If omitted, AppSettings["LogFile"] or Log.Log files in Application directory will be used
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.LogFileFallback">
+            <summary>
+            If we fail writing to logFile, this file is used to log, as well as Event Log 
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.LogLevel">
+            <summary>
+            Log level. If specified in LogMessage, the message will be logged if the specified EventMetadata logLevel is equal or less than this value.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.UseUTC">
+            <summary>
+            Should UTC be used when logging. Default = true
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.UseDateForLogFileName">
+            <summary>
+            If true, the log file name will be ignored, and every day new log file will be used to log to, with file name representing the date.
+            Handy when the application is running absolutely unattended and the log file's size should not exceed a daily quota.
+            Default=false
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.LogFileSizeLimitMb">
+            <summary>
+            As the log file reaches this size, no more logging will be performed into that file. That value should be greater than LogFileSizeThresholdMb so that we get notifications of the log file approaching its limit BEFORE the limit has been reached
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.LogFileSizeThresholdMb">
+            <summary>
+            As the log file reaches this size, further logging to that file will be accompanied with notifications of that issue
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.ProcessMemoryThresholdKb">
+            <summary>
+            Should the App consume more memory, the CheckProcessMemory() will log this problem, the caller will not have to do that itself.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.UseLowestLogLevel">
+            <summary>
+            When set to true, the locally set log level has precedence if it is lower than global log level. Otherwise (or if not set) greater of Global and Local is used because the intention is to see the order of events.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.SuppressAssembliesOutput">
+            <summary>
+            In environments that are well-controlled there is no value in outputing all the Assemblies data, so here is an option to surpress that output
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsLogLevel">
+            <summary>
+            Log level. If specified in LogMessage, the message will be logged if the specified EventMetadata logLevel is equal or less than this value.
+            It is of integer type so that it is easier to set it in config file.
+            See the LogLevels enumeration for the mappings.
+            The default is none, so that the logging does not fail when not completely configured.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsMailServers">
+            <summary>
+            Semicolon-delimited list of SMTP servers to send the email alerts. The first available will be used.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsRecipients">
+            <summary>
+            Semicolon-delimited list of recipients of the alerts
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsMailAccount">
+            <summary>
+            Valid Email account used to send alerts by email. Valid in terms that many SMTP servers will be matching the domain name of that account to domain name of sending SMTP server.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertResetIntervalMinutes">
+            <summary>
+            Interval after which the same notifications will be allowed to be emailed again. Default is 30 min. That is to prevent of flooding mailboxes with the same notification, especially if the problem repeats every second.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsJournalSize">
+            <summary>
+            Number of messages memorised by the component, so that these messages were not sent as alerts more often than specified by AlertResetIntervalMinutes
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.AlertsUseMessageText">
+            <summary>
+            There should be a way to prevent sending the same message every second, only because an exception happens every second in a particular part of application.
+            The preferred way is to use exceptionId (messageId) parameter of LogException or LogMessage methods, where there is a danger of the same exception(or message) being thrown too often.
+            As a safety net, in absense of the exceptionId, the first 15 characters of the EventMetadata Text will be used instead.
+            Default=true. If set to false, the only alerts sent will be for calls to LogException or LogMessage that specify the exceptionId (messageId) parameter.
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.Interactive">
+            <summary>
+            If set to true, and an exception is logged, a Windows form will be presented to the user, so that the developer implementing this component does not have to develop any user dialog.
+            Do not use this functionality in unattended applications, as there will be no one to let the application proceed further!
+            Default=false 
+            </summary>
+        </member>
+        <member name="P:CommonSenseSoft.Log.Logging.TimeStamp">
+            <summary>
+            Returns string representing current time in consistent format, whether in local or UTC time, depending on UseUTC setting
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.Logging.enuBlankLines">
+            <summary>
+            Predefined ways of Blank Line appearing when writing a line into a log file
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.enuBlankLines.None">
+            <summary>
+            No Blank Lines.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.enuBlankLines.DoubleTopAndBottom">
+            <summary>
+            Two blank lines before and two blank lines After
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.enuBlankLines.TopAndBottom">
+            <summary>
+            One blank line before and one blank line After
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.enuBlankLines.Top">
+            <summary>
+            One blank line before
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.Logging.enuBlankLines.Bottom">
+            <summary>
+            One blank line after
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.LogLevels">
+            <summary>
+            Pre-defined levels of logging.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.None">
+            <summary>
+            No logging.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Fatal">
+            <summary>
+            Error from which no recovery had been implemented, AKA Failure.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Exceptions">
+            <summary>
+            Errors and Exceptions are logged only.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Warnings">
+            <summary>
+            Errors, Exceptions and Warnings are logged only.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Information">
+            <summary>
+            Errors, Exceptions, Warnings and Information are logged only.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Calls">
+            <summary>
+            Errors, Exceptions, Warnings, Information and Procedures calls are logged.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Parameters">
+            <summary>
+            Errors, Exceptions, Warnings, Information, Procedures calls and Procedures parameters values are logged.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.LogLevels.Debug">
+            <summary>
+            Errors, Exceptions, Warnings, Information, Procedures calls, Procedures parameters values and execution steps inside procedures are logged.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.MailPriority">
+            <summary>
+            Specifies the priority level for the e-mail message.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.MailPriority.Normal">
+            <summary>
+            Specifies that the e-mail message has normal priority.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.MailPriority.Low">
+            <summary>
+            Specifies that the e-mail message has low priority.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.MailPriority.High">
+            <summary>
+             Specifies that the e-mail message has high priority.
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.EventMetadata">
+            <summary>
+            Reads and stores Events metadata, also helps format run-time Events 
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.EventMetadata.PLACEHOLDER">
+            <summary>
+            Placeholder to use in Text to be replaced with data provided by caller.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.EventMetadata.Id">
+            <summary>
+            Id of the Event. It is int because some apps that may use it will accept numbers only, so it is better to be safe than sorry
+            Desireable notation is Category as the first number, followed by 3 arbitrary numbers.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.EventMetadata.Category">
+            <summary>
+            Category of the Event.
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.EventMetadata.Type">
+            <summary>
+            1=Error, 2=Warning, 4=Information, 8=SuccessAudit, 16=FailureAudit
+            </summary>
+        </member>
+        <member name="F:CommonSenseSoft.Log.EventMetadata.Text">
+            <summary>
+            Text of the EventMetadata. The placeholders will be replaced with run-time values.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.EventMetadata.ToString(System.String[])">
+            <summary>
+            Replaces placeholders in the EventMetadata description with supplied parameters, then compiles properties of this object into meaningful to humans, standard string
+            </summary>
+            <param name="descriptionReplacements">Optional Array of values to replace placeholders in the Text of the Event. That is required then run-time specifics should be mentioned in the Text</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.EventMetadata.ToString">
+            <summary>
+            Compiles properties of this object into meaningful to humans, standard string
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.EventsMetadata">
+            <summary>
+            Provides External Application with means of defining its Events in a structured way in a config file.  
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.EventsMetadata.#cctor">
+            <summary>
+            There is not much harm in explicit constructor. Should occur when App starts rather than any functionality kicks in God knows when. It is even better to fail on start.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.EventsMetadata.Event(System.Int32)">
+            <summary>
+            Returns EventMetadata object populated from config file
+            </summary>
+            <param name="eventId">ID of the EventMetadata in config file.</param>
+            <returns>Populated EventMetadata object if the ID is valid. Otherwise the properties are populated with defaults, and the Text telling that the EventMetadata could not be found</returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.EventsMetadata.Deserialize">
+            <summary>
+            Deserializes the Events from file and keeps them in RAM
+            </summary>
+        </member>
+        <member name="T:CommonSenseSoft.Log.UTILS">
+            <summary>
+            Mostly copies of methods found in CommonSenseSoft.Lib so that there is no dependancy on that library.
+            </summary>
+        </member>
+        <member name="M:CommonSenseSoft.Log.UTILS.Repeat(System.String,System.Int32)">
+            <summary>
+            Repeats text as many times as required. Use PadLeft() if there is only one character to repeat
+            </summary>
+            <param name="text">Text to repeat</param>
+            <param name="times">Times to repeat</param>
+            <returns></returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.UTILS.ConcatenateWithDelimiters(System.String,System.String[])">
+            <summary>
+            Concatenates supplied values using the delimiter. If the value is null or empty string, the delimiter is skipped. Handy for creating strings from arguments some of which may be missing values.
+            </summary>
+            <param name="delimiter">Delimiter to insert between non-empty values</param>
+            <param name="values">params array of values to be delimited</param>
+        </member>
+        <member name="M:CommonSenseSoft.Log.UTILS.Concatenate(System.String[],System.String[])">
+            <summary>
+            Concatenates 2 Arrays of strings
+            </summary>
+            <param name="array1"></param>
+            <param name="array2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommonSenseSoft.Log.UTILS.ReDim(System.String[]@,System.Int64)">
+            <summary>
+            Changes size of string array preserving its elements
+            </summary>
+            <param name="arrayToReDim"></param>
+            <param name="newSize"></param>
+        </member>
+    </members>
+</doc>

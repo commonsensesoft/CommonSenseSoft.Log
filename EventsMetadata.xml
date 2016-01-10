@@ -1,0 +1,631 @@
+<?xml version="1.0" standalone="yes"?>
+<!--THIS FILE MUST BE IN ROOT DIRECTORY OF THE APPLICATION AND UP-TO DATE-->
+<!--Type: Error=1,Warning=2,Information=4	DO NOT USE:,SuccessAudit=8,FailureAudit=16-->
+<Events>
+	<Category Id="1" Type="Uncategorized"/><!--DO NOT CHANGE THIS VALUE-->
+	<Category Id="2" Type="Data"/>
+	<Category Id="3" Type="User"/>
+	<Category Id="4" Type="Environment"/>
+	<Category Id="5" Type="Performance"/>
+
+	<Event>
+		<Id>1100</Id>
+		<Category>1</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>1200</Id>
+		<Category>1</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>1400</Id>
+		<Category>1</Category>
+		<Type>4</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2022</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Error removing text qualifier at first field of Record ???:
+[???]
+Most likely the first value is shorter than 2 characters.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2023</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Error when trying to remove Text Qualifier from Value [???] found at Record ??? Field ??? (???).
+Error:[???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2024</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Error casting value [???] at record=[???] field=[???] into Source.Type=[???]
+Error=[???]</Text>
+		<Description>Used on the stage of casting indound data according to its source format</Description>
+	</Event>
+	<Event>
+		<Id>2025</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Error converting value [???] at record=[???] field=[???] Source.Type=[???] into Target.Format=[???]
+Error=[???]
+		</Text>
+		<Description>Used on the stage of casting already typed inbound data into its target format</Description>
+	</Event>
+	<Event>
+		<Id>2050</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>The first record of the file does not match configured columns count, names or order: ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2060</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>The combined length of configured Source Mappings is ???, but the Record ??? contains ??? characters.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2061</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Record ??? contains ??? full fields, which does not match ??? configured Source Mappings. Data policy is to abort.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2062</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Number of faulty records have reached ??? and the percentage is ???, which is over ??? threshold. Data policy is to abort.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2065</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Record ??? does not contain node [???], and the policy is ???.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2070</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Record ??? starts with value [???] that does not match Source of any related Entity.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2071</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Record ??? is not empty but starts with empty value, therefore it can not be attributed to any nested Entity.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2080</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Error reading value of the first field at record [???]:
+[???]
+Most likely the Record is short of the length of the first field length configured.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2100</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2101</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error [???] returned by external .NET component. The data batch is being discarded.</Text>
+		<Description>This error, as other errors of Category=2, tells the Application to discard the inbound data and move to next unit of data to process</Description>
+	</Event>
+	<Event>
+		<Id>2110</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Entity [???] data starting from record ??? is discarded until new entry of this Entity.</Text>
+		<Description></Description>
+	</Event>
+	<Event>
+		<Id>2117</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>DUPLICATE KEYS Records COUNT: ???</Text>
+		<Description>Duplicate keys reported as Data Error rather than warning</Description>
+	</Event>
+	<Event>
+		<Id>2120</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>??? message sent ??? to ???</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2130</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Inconsistent Scheduled Times. ???.</Text>
+		<Description></Description>
+	</Event>
+	<Event>
+		<Id>2200</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>???</Text>
+		<Description>Data Warnings</Description>
+	</Event>
+	<Event>
+		<Id>2220</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>??? message on ??? to ??? failed by internal validation: [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2221</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>??? message on ??? to ??? failed by provider: Status=[???], Message=[???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2210</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2245</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Database insert failed: [???]. Typically that is caused by bad source data.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2246</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Empty data detected. Record [???], Field [???]. Data policy is to abort.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2247</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Data Error. Duplicate value detected. Record [???], Field [???]. The value [???] already exists in Record [???]. Data policy is to abort.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2261</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>Data Warning. Record ??? contains ??? full fields, which does not match ??? configured Mappings. Data policy is to skip.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2270</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Record [???] starts with value [???] that does not correspond to Entity [???] or any of its children.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2279</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>No attachments matching [???] mask have been extracted from Message containing ??? attachments, sent from ???.</Text>
+		<Description>Email comes into folder but has no attachment we expect</Description>
+	</Event>
+	<Event>
+		<Id>2280</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>Data Error. Empty data detected. Record [???], Field [???]. Data policy is to skip.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2281</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>Data Error. Duplicate value detected. Record [???], field [???]. The value [???] already exists in Record [???]. Data policy is to skip.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2282</Id>
+		<Category>2</Category>
+		<Type>2</Type>
+		<Text>No scheduled Time supplied with data. Assuming immediate ETL.</Text>
+	</Event>
+	<Event>
+		<Id>2283</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>No record to process.</Text>
+	</Event>
+	<Event>
+		<Id>2284</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>No DataSet to process.</Text>
+	</Event>
+	<Event>
+		<Id>2285</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>DataSet is empty.</Text>
+	</Event>
+	<Event>
+		<Id>2400</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>???</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2401</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>INTERCHANGE [???]</Text>
+		<Description>Log interchange id in the Report</Description>
+	</Event>
+	<Event>
+		<Id>2481</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>Bad Data. Duplicate value detected. Record [???], field [???]. The value [???] already exists in Record [???]. The record is still ETLd.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2500</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Failed to transform [???]. Reason: [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2510</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Could not create XPathDocument from stream. Reason: [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2513</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>Failed to ReadToDescendant of [???]</Text>
+	</Event>
+	<!--Appears to be unusedEvent>
+		<Id>2560</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>??? SMTP Events submitted.</Text>
+		<Description>?</Description>
+	</Event-->
+	<Event>
+		<Id>2700</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>DATA Records CONVERTED: ???</Text>
+		<Description>Not needed anymore?</Description>
+	</Event>
+	<Event>
+		<Id>2701</Id>
+		<Category>2</Category>
+		<Type>2</Type><!--That should not be an Error because sometimes we are OK with that. Let Individual Mappings affect that-->
+		<Text>DUPLICATE KEYS Records COUNT: ???</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2702</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>Source Records were processed but not Loaded because Target was not requested.</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2703</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>DATA RecordS AFFECTED = ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2704</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>DATA RecordS FETCHED = ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2706</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>Data Records read but not transformed due to data error.</Text>
+		<Description>Still appears to be needed</Description>
+	</Event>
+	<Event>
+		<Id>2707</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>DataTables FETCHED = ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2708</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>PROCEDURE RESULTS FETCHED = ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2709</Id>
+		<Category>1</Category>
+		<Type>4</Type>
+		<Text>Total ??? records had been processed. ??? records loaded and ??? records dropped.</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2710</Id>
+		<Category>1</Category>
+		<Type>4</Type>
+		<Text>Total ??? records had been processed. Nothing Loaded because Target was not requested.</Text>
+		<Description>!</Description>
+	</Event>
+	<Event>
+		<Id>2711</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>??? files uploaded</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>2800</Id>
+		<Category>2</Category>
+		<Type>1</Type>
+		<Text>FAILED executing ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3010</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>Unspecified fatal error returned</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3020</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>Data Provider Error: [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3021</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>Data Provider Error: [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3100</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3101</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>Operation cancelled by external .NET component:[???]. The data batch is due for being re-tried.</Text>
+		<Description>This error, as other errors of Category=3, tells the Application to roll back and retry.</Description>
+	</Event>
+	<Event>
+		<Id>3200</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3400</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>3560</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>Event [???] submitted to ???.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>5420</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Started executing</Text>
+		<Description>Timestamp of starting execution of something</Description>
+	</Event>
+	<Event>
+		<Id>4110</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>EXCEPTION: The [???] file was already processed at ???
+If you indeed intend to process this file once more, send it under a different name or after ??? minutes.</Text>
+		<Description>?</Description>
+	</Event>
+	<!--Event>
+		<Id>4150</Id>
+		<Category>4</Category>
+		<Type>1</Type>
+		<Text>MANUAL INTERVENTION REQUIRED: File ??? was uploaded before.
+This means that the newer file is not uploaded, but you still should find it in the Entity's target directories
+Contact the recipient of the file and send the latest file manually if they want it.</Text>
+		<Description>?</Description>
+	</Event-->
+	<Event>
+		<Id>4201</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>Source records affected by Duplicates: ???</Text>
+		<Description>Source records affected by Duplicates</Description>
+	</Event>
+	<Event>
+		<Id>4261</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>??? attachments matching [???] mask have been successfully extracted from SMTP Message containing ??? attachments, sent from ???:???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4410</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>??? files found in the source directory.</Text>
+		<Description>We do not tell which one, because there is also a files mask in the equasion, so keep it simple</Description>
+	</Event>
+	<Event>
+		<Id>4422</Id>
+		<Category>1</Category>
+		<Type>4</Type>
+		<Text>Called procedure reported:[???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4423</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>XSL transformation [???] resulted in ??? bytes</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4425</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>XML received from Database.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4430</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Started uploading ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4431</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Successfully finished uploading ???</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4432</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>File [???] (??? bytes) is written to disk.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4440</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>INTERCHANGE ROLLED BACK.</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4441</Id>
+		<Category>2</Category>
+		<Type>4</Type>
+		<Text>TRANSACTION [???] ROLLED BACK.</Text>
+		<Description>Used when Transactions configured inside ETL are rolled back</Description>
+	</Event>
+	<Event>
+		<Id>4450</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>Trigger File [???] moved to [???]</Text>
+		<Description>?</Description>
+	</Event>
+	<Event>
+		<Id>4451</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>Trigger File [???] copied to [???]</Text>
+	</Event>
+	<Event>
+		<Id>4452</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>Trigger File [???] deleted</Text>
+	</Event>
+	<Event>
+		<Id>4453</Id>
+		<Category>4</Category>
+		<Type>4</Type>
+		<Text>Trigger File [???] was moved during ETL process</Text>
+		<Description>In some scenarios we want ETL to move the trigger file, so it is OK to come back after successful ETL and not to find the original file</Description>
+	</Event>
+	<Event>
+		<Id>5410</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Job ??? created</Text>
+		<Description>Timestamp of creating a send Job</Description>
+	</Event>
+	<Event>
+		<Id>5411</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Data tables created</Text>
+		<Description>Timestamp of creating datatables for Recipients</Description>
+	</Event>
+	<Event>
+		<Id>5412</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Data tables populated</Text>
+		<Description>Timestamp of end of population of datatables for Recipients</Description>
+	</Event>
+	<Event>
+		<Id>5413</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Indexes Created</Text>
+		<Description>Timestamp of indexes being created on the table</Description>
+	</Event>
+	<Event>
+		<Id>5421</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Successfully finished executing ???</Text>
+		<Description>Timestamp of finishing execution of something that has no processed or failed records to report</Description>
+	</Event>
+	<Event>
+		<Id>5422</Id>
+		<Category>5</Category>
+		<Type>4</Type>
+		<Text>Finished executing WITH ERRORS</Text>
+		<Description>Timestamp of finishing execution of something with errrors</Description>
+	</Event>
+</Events>
