@@ -298,7 +298,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="logFile">Log file. If omitted, LogFilePathName, AppSettings["LogFile"] or Log.Log files will be used</param>
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		public static void LogException(string action,Exception e,bool throwBack,string logFile,string exceptionID){
-            if(logFile==null || logFile=="")logFile=GetLogFilePathName();
+            //logFile=GetLogFilePathName(logFile);
             string strAction=(action==null||action=="")?"":strAction="Action:["+action+"]\r\n";
 			LogLevels LogLevelToUse=LogLevels.Fatal;
 			
@@ -360,7 +360,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="logFile">Log file if different from globally configured</param>
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		public static void LogException(string exceptionMessage,bool throwBack,string logFile,string exceptionID) {
-			if(logFile==null || logFile=="") logFile=GetLogFilePathName();
+			//logFile=GetLogFilePathName(logFile);
 			string strMsg = exceptionMessage+((_blnSuppressAssembliesOutput)?"":GetAssembliesEngaged());
 			LogMessage(strMsg,logFile,true,LogLevels.Fatal,-1,exceptionID);
 			if (_blnInteractive) {
@@ -389,7 +389,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="e">Exception to log</param>
 		/// <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
 		public static void LogException(Exception e, bool throwBack){
-			LogException(e,throwBack,GetLogFilePathName(),"");
+			LogException(e,throwBack,null,"");
 		}
 		
 		/// <summary>
@@ -399,7 +399,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		/// <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
 		public static void LogException(Exception e, string exceptionID, bool throwBack){
-			LogException(e,throwBack,GetLogFilePathName(),exceptionID);
+			LogException(e,throwBack,null,exceptionID);
 		}
 		/// <summary>
 		/// Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
@@ -407,7 +407,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="e">Exception to log</param>
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		public static void LogException(Exception e, string exceptionID){
-			LogException(e,false,GetLogFilePathName(),exceptionID);
+			LogException(e,false,null,exceptionID);
 		}
 
 		/// <summary>
@@ -415,7 +415,7 @@ namespace CommonSenseSoft.Log{
 		/// </summary>
 		/// <param name="e">Exception to log</param>
 		public static void LogException(Exception e){
-			LogException(e,false,GetLogFilePathName(),"");
+			LogException(e,false,null,"");
 		}
 
 		/// <summary>
@@ -433,14 +433,14 @@ namespace CommonSenseSoft.Log{
 		/// <param name="exceptionMessage">Exception message</param>
 		/// <param name="throwBack">Should an exception be thrown back into the system?</param>
 		public static void LogException(string exceptionMessage,bool throwBack) {
-			LogException(exceptionMessage,throwBack,GetLogFilePathName(),"");
+			LogException(exceptionMessage,throwBack,null,"");
 		}
 		/// <summary>
 		/// This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
 		/// </summary>
 		/// <param name="exceptionMessage">Exception message</param>
 		public static void LogException(string exceptionMessage) {
-			LogException(exceptionMessage,false,GetLogFilePathName(),"");
+			LogException(exceptionMessage,false,null,"");
 		}
 		/// <summary>
 		/// This overload is iseful when there is no actual exception in the system, but we want an event to treat as an exception
@@ -448,7 +448,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="exceptionMessage">Exception message</param>
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		public static void LogException(string exceptionMessage,string exceptionID) {
-			LogException(exceptionMessage,false,GetLogFilePathName(),exceptionID);
+			LogException(exceptionMessage,false,null,exceptionID);
 		}
 		
 		/// <summary>
@@ -469,7 +469,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
 		/// <param name="exceptionID">Unique ID assigned in your code. Required so that the same exception does not send SMTP alerts every second</param>
 		public static void LogException(string action,Exception e,bool throwBack,string exceptionID){
-			LogException(action,e,throwBack,GetLogFilePathName(),exceptionID);
+			LogException(action,e,throwBack,null,exceptionID);
 		}
 		/// <summary>
 		/// Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
@@ -478,7 +478,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="e">Exception to log</param>
 		/// <param name="throwBack">Do you want this exception being thrown back to you? Default=false</param>
 		public static void LogException(string action,Exception e,bool throwBack) {
-			LogException(action,e,throwBack,GetLogFilePathName(),"");
+			LogException(action,e,throwBack,null,"");
 		}
 		/// <summary>
 		/// Logs Exception to log file. Depending on Alerts configuration, this may also result in sending an SMTP message
@@ -486,7 +486,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="action">action attempted, that resulted in the exception</param>
 		/// <param name="e">Exception to log</param>
 		public static void LogException(string action,Exception e) {
-			LogException(action,e,false,GetLogFilePathName(),"");
+			LogException(action,e,false,null,"");
 		}
 
 		#endregion
@@ -575,7 +575,10 @@ namespace CommonSenseSoft.Log{
 				//WHEN LOG FILE IS UNACCESSIBLE WE ATTEMPT TO LOG TO BACKUP LOG AND EVENT LOG.
 				if((_blnUseLowestLogLevelIfLocalLevelConfigured && ((int)logLevel<=_intLogLevel && ((int)logLevel<=localLogLevel || localLogLevel<=0))) 
 				|| !_blnUseLowestLogLevelIfLocalLevelConfigured && ((int)logLevel<=_intLogLevel || (int)logLevel<=localLogLevel)){
-					if(! _blnLogFileSizeExceeded){
+					//Then we actually worry about the file we are writing into
+					logFile=GetLogFilePathName(logFile);//That exuses every caller from calling GetLogFilePathName(logFile), especially if this method figures out that we are not writing this call
+					
+					if(! _blnLogFileSizeExceeded){//That refers to the globally-configured file unless there happened to be a local file that tripped that flag
 						#region Check File Size
 						strAction="File Size";
 						try {
@@ -789,7 +792,7 @@ namespace CommonSenseSoft.Log{
 				sb.Append(strAction);sb.Append("]\r\nError=[");sb.Append(e.Message);sb.Append("], User=");sb.Append(System.Environment.UserName);
 				sb.Append("\rLocationce=[");sb.Append(e.Source);sb.Append("]\r\nStack Trace=[");sb.Append(e.StackTrace);sb.Append("]");
 //				WriteLineToFile("FallBack.log",strMessage);
-				WriteLineToFileWithExceptionReturned("FallBack.log",sb.ToString());
+				WriteLineToFileWithExceptionReturned(LogFileFallback,sb.ToString());
 			}
 			if(strMessageToThrowToCaller!="")throw new Exception(strMessageToThrowToCaller);
 			
@@ -847,12 +850,11 @@ namespace CommonSenseSoft.Log{
 		/// <param name="messageID">Unique ID of the message. It is required so that the message does not cause Alert more than once in a period configured (AlertResetIntervalMinutes property)</param>
 		public static void LogMessage(string message, bool surroundWithEmptyLines, LogLevels logLevel, string messageID){
 			if(surroundWithEmptyLines){
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.DoubleTopAndBottom,logLevel,-1,"");
+				LogMessage(message,null,enuBlankLines.DoubleTopAndBottom,logLevel,-1,"");
 			}
 			else{
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,-1,"");
+				LogMessage(message,null,enuBlankLines.None,logLevel,-1,"");
 			}
-			//LogMessage(message,GetLogFilePathName(),surroundWithEmptyLines,logLevel,-1,messageID);
 		}
 		/// <summary>
 		/// Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
@@ -870,10 +872,10 @@ namespace CommonSenseSoft.Log{
 		/// <param name="surroundWithEmptyLines">Inserts empty lines before and after the message when writing to the log.</param>
 		public static void LogMessage(string message, bool surroundWithEmptyLines){
 			if(surroundWithEmptyLines){
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.DoubleTopAndBottom,LogLevels.Fatal,-1,"");
+				LogMessage(message,null,enuBlankLines.DoubleTopAndBottom,LogLevels.Fatal,-1,"");
 			}
 			else{
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Fatal,-1,"");
+				LogMessage(message,null,enuBlankLines.None,LogLevels.Fatal,-1,"");
 			}
 		}
 		/// <summary>
@@ -882,7 +884,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
 		public static void LogMessage(string message, LogLevels logLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,-1,"");
+			LogMessage(message,null,enuBlankLines.None,logLevel,-1,"");
 		}
 		/// <summary>
 		/// Logs message to file. Depending on Alerts configuration, this may also result in sending an SMTP message.
@@ -891,7 +893,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
 		public static void LogMessage(string message,LogLevels logLevel,int localLogLevel) {
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,localLogLevel,"");
+			LogMessage(message,null,enuBlankLines.None,logLevel,localLogLevel,"");
 		}
 
 		/// <summary>
@@ -902,10 +904,10 @@ namespace CommonSenseSoft.Log{
 		/// <param name="logLevel">Defines what the minimum level of logging should be configured (see LogLevel property) in order to log this message and AlertsLogLevel property to mail this message. This allows changing the level of details logged without changing and recompiling the application.Default=ExceptionsOnly</param>
 		public static void LogMessage(string message, bool surroundWithEmptyLines, LogLevels logLevel){
 			if(surroundWithEmptyLines){
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.DoubleTopAndBottom,logLevel,-1,"");
+				LogMessage(message,null,enuBlankLines.DoubleTopAndBottom,logLevel,-1,"");
 			}
 			else{
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,-1,"");
+				LogMessage(message,null,enuBlankLines.None,logLevel,-1,"");
 			}
 		}
 
@@ -918,10 +920,10 @@ namespace CommonSenseSoft.Log{
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
 		public static void LogMessage(string message,bool surroundWithEmptyLines,LogLevels logLevel,int localLogLevel) {
 			if(surroundWithEmptyLines){
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.DoubleTopAndBottom,logLevel,localLogLevel,"");
+				LogMessage(message,null,enuBlankLines.DoubleTopAndBottom,logLevel,localLogLevel,"");
 			}
 			else{
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,localLogLevel,"");
+				LogMessage(message,null,enuBlankLines.None,logLevel,localLogLevel,"");
 			}
 		}
 		/// <summary>
@@ -942,10 +944,10 @@ namespace CommonSenseSoft.Log{
 			}
 			if(includeHttpRequestData)message+=Environment.NewLine+GetWebRequestData();
 			if(surroundWithEmptyLines){
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.DoubleTopAndBottom,logLevel,localLogLevel,"");
+				LogMessage(message,null,enuBlankLines.DoubleTopAndBottom,logLevel,localLogLevel,"");
 			}
 			else{
-				LogMessage(message,GetLogFilePathName(),enuBlankLines.None,logLevel,localLogLevel,"");
+				LogMessage(message,null,enuBlankLines.None,logLevel,localLogLevel,"");
 			}
 		}
 
@@ -957,7 +959,7 @@ namespace CommonSenseSoft.Log{
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
 		/// <param name="insertBlankLines">How you want the blank lines being inserted</param>
 		public static void LogMessage(string message, LogLevels logLevel,int localLogLevel,enuBlankLines insertBlankLines){
-			LogMessage(message,GetLogFilePathName(),insertBlankLines,logLevel,localLogLevel,"");
+			LogMessage(message,null,insertBlankLines,logLevel,localLogLevel,"");
 		}
 
 		#region Debug
@@ -965,16 +967,10 @@ namespace CommonSenseSoft.Log{
 		/// Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Debug(string message){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Debug,-1,"");
-		}
-		/// <summary>
-		/// Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Debug(string message,int localLogLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Debug,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Debug(string message,int localLogLevel=-1,string localLogFile=null){
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Debug,localLogLevel,"");
 		}
 		#endregion
 
@@ -983,16 +979,10 @@ namespace CommonSenseSoft.Log{
 		/// Best placed at the top of procedures. Include parameters values still unaffected.
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Parameters(string message) {
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Parameters,-1,"");
-		}
-		/// <summary>
-		/// Best placed at the top of procedures. Include parameters values still unaffected.
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Parameters(string message,int localLogLevel) {
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Parameters,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Parameters(string message,int localLogLevel=-1,string localLogFile=null) {
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Parameters,localLogLevel,"");
 		}
 		#endregion
 
@@ -1001,16 +991,10 @@ namespace CommonSenseSoft.Log{
 		/// Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Call(string message){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Calls,-1,"");
-		}
-		/// <summary>
-		/// Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Call(string message,int localLogLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Calls,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Call(string message,int localLogLevel=-1,string localLogFile=null){
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Calls,localLogLevel,"");
 		}
 		#endregion
 
@@ -1019,16 +1003,10 @@ namespace CommonSenseSoft.Log{
 		/// Log informational message, not related to any particular procedure
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Info(string message){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Information,-1,"");
-		}
-		/// <summary>
-		/// Log informational message, not related to any particular procedure
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Info(string message,int localLogLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Information,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Info(string message,int localLogLevel=-1,string localLogFile=null){
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Information,localLogLevel,"");
 		}
 		#endregion
 
@@ -1037,16 +1015,10 @@ namespace CommonSenseSoft.Log{
 		/// Log a condition that does not constitute an Exception, but still concerning.
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Warn(string message){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Warnings,-1,"");
-		}
-		/// <summary>
-		/// Log a condition that does not constitute an Exception, but still concerning.
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Warn(string message,int localLogLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Warnings,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Warn(string message,int localLogLevel=-1,string localLogFile=null){
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Warnings,localLogLevel,"");
 		}
 		#endregion Warn
 
@@ -1055,16 +1027,10 @@ namespace CommonSenseSoft.Log{
 		/// Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
 		/// </summary>
 		/// <param name="message">Message text to be logged (and may be sent)</param>
-		public static void Exception(string message) {
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Exceptions,-1,"");
-		}
-		/// <summary>
-		/// Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
-		/// </summary>
-		/// <param name="message">Message text to be logged (and may be sent)</param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Exception(string message,int localLogLevel) {
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Exceptions,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Exception(string message,int localLogLevel=-1,string localLogFile=null) {
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Exceptions,localLogLevel,"");
 		}
 		#endregion
 
@@ -1073,16 +1039,10 @@ namespace CommonSenseSoft.Log{
 		/// Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
 		/// </summary>
 		/// <param name="message"></param>
-		public static void Fatal(string message){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Fatal,-1,"");
-		}
-		/// <summary>
-		/// Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
-		/// </summary>
-		/// <param name="message"></param>
 		/// <param name="localLogLevel">Redefines global log level for this particular call</param>
-		public static void Fatal(string message,int localLogLevel){
-			LogMessage(message,GetLogFilePathName(),enuBlankLines.None,LogLevels.Fatal,localLogLevel,"");
+		/// <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
+		public static void Fatal(string message,int localLogLevel=-1,string localLogFile=null){
+			LogMessage(message,localLogFile,enuBlankLines.None,LogLevels.Fatal,localLogLevel,"");
 		}
 		#endregion
 
@@ -1545,42 +1505,45 @@ namespace CommonSenseSoft.Log{
 			
 		#region PRIVATE MEMBERS
 		#region GetLogFilePathName
-		static string GetLogFilePathName(){
-			string strLogFileName = "LogForUnconfiguredProcess.log";
-			string strDate;
-			if (_strLogFilePathName == ""){
-				_strLogFilePathName = GetAssemblyDirectory() + "\\" + strLogFileName;
-			}
-			
-			if(_blnUseDateForLogFileName) {
-				#region Update the mblnUseDateForLogFileName with current date
-				if(_blnUseUTC){
-					strDate = System.DateTime.UtcNow.ToString("yyyyMMdd");
+		static string GetLogFilePathName(string localPathName){
+			if(localPathName==null || localPathName==""){//No request for a separate pathname
+				if (_strLogFilePathName == ""){//Take the opportunity to set it
+					_strLogFilePathName = GetAssemblyDirectory() + "\\LogForUnconfiguredProcess.log";
 				}
-				else{
-					strDate = System.DateTime.Now.ToString("yyyyMMdd");
-				}
-				int intPos = _strLogFilePathName.LastIndexOf(".");
-				if(intPos==-1){
-					if(_blnDateInsertedIntoFileName){//replace then
-						_strLogFilePathName=_strLogFilePathName.Substring(0,_strLogFilePathName.Length-8)+strDate+".log";
+				if(_blnUseDateForLogFileName) {
+					string strDate;
+					#region Update the PathName with current date
+					if(_blnUseUTC){
+						strDate = System.DateTime.UtcNow.ToString("yyyyMMdd");
 					}
 					else{
-						_strLogFilePathName+=strDate+".log";
+						strDate = System.DateTime.Now.ToString("yyyyMMdd");
 					}
+					int intPos = _strLogFilePathName.LastIndexOf(".");
+					if(intPos==-1){//No extension for the log file had been specified
+						if(_blnDateInsertedIntoFileName){//replace then
+							_strLogFilePathName=_strLogFilePathName.Substring(0,_strLogFilePathName.Length-8)+strDate+".log";
+						}
+						else{
+							_strLogFilePathName+=strDate+".log";
+						}
+					}
+					else{//Insert the date in front of extension
+						if(_blnDateInsertedIntoFileName){//replace then
+							_strLogFilePathName=_strLogFilePathName.Substring(0,intPos-8)+strDate+_strLogFilePathName.Substring(intPos);
+						}
+						else{
+							_strLogFilePathName = _strLogFilePathName.Substring(0,intPos) + strDate + _strLogFilePathName.Substring(intPos);
+						}
+					}
+					_blnDateInsertedIntoFileName=true;//so that next time we rather replace
+					#endregion
 				}
-				else{//Insert the date in front of extension
-					if(_blnDateInsertedIntoFileName){//replace then
-						_strLogFilePathName=_strLogFilePathName.Substring(0,intPos-8)+strDate+_strLogFilePathName.Substring(intPos);
-					}
-					else{
-						_strLogFilePathName = _strLogFilePathName.Substring(0,intPos) + strDate + _strLogFilePathName.Substring(intPos);
-					}
-				}
-				_blnDateInsertedIntoFileName=true;//so that next time we rather replace
-				#endregion
+				return _strLogFilePathName; //return it changed or not
 			}
-			return _strLogFilePathName; //return it changed or not
+			else{
+				return localPathName;
+			}
 		}
 		#endregion
 

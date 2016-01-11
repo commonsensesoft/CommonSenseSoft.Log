@@ -590,96 +590,61 @@
             <param name="localLogLevel">Redefines global log level for this particular call</param>
             <param name="insertBlankLines">How you want the blank lines being inserted</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Debug(System.String)">
-            <summary>
-            Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Debug(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Debug(System.String,System.Int32,System.String)">
             <summary>
             Most verbose level 9. The code is typically placed around pieces of code that are prone to problems, as well as logging changes of vital values
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Parameters(System.String)">
-            <summary>
-            Best placed at the top of procedures. Include parameters values still unaffected.
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Parameters(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Parameters(System.String,System.Int32,System.String)">
             <summary>
             Best placed at the top of procedures. Include parameters values still unaffected.
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Call(System.String)">
-            <summary>
-            Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Call(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Call(System.String,System.Int32,System.String)">
             <summary>
             Best placed at the top of procedures. That allows accurate recording of time the procedure being called. Optionally you may want to include parameters values still unaffected.
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Info(System.String)">
-            <summary>
-            Log informational message, not related to any particular procedure
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Info(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Info(System.String,System.Int32,System.String)">
             <summary>
             Log informational message, not related to any particular procedure
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Warn(System.String)">
-            <summary>
-            Log a condition that does not constitute an Exception, but still concerning.
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Warn(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Warn(System.String,System.Int32,System.String)">
             <summary>
             Log a condition that does not constitute an Exception, but still concerning.
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Exception(System.String)">
-            <summary>
-            Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
-            </summary>
-            <param name="message">Message text to be logged (and may be sent)</param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Exception(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Exception(System.String,System.Int32,System.String)">
             <summary>
             Log a condition that is not aFatal error, but rather an exception, which is typically anticipated and taken care of.
             </summary>
             <param name="message">Message text to be logged (and may be sent)</param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Fatal(System.String)">
-            <summary>
-            Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
-            </summary>
-            <param name="message"></param>
-        </member>
-        <member name="M:CommonSenseSoft.Log.Logging.Fatal(System.String,System.Int32)">
+        <member name="M:CommonSenseSoft.Log.Logging.Fatal(System.String,System.Int32,System.String)">
             <summary>
             Error from which there is no recovery. This call is typically placed at the top of call stack so that all the stack is being captured and logged.
             </summary>
             <param name="message"></param>
             <param name="localLogLevel">Redefines global log level for this particular call</param>
+            <param name="localLogFile">Log file if needs to be different from Application-wide. If omitted, globally-configured LogFilePathName, AppSettings["LogFile"] or LogForUnconfiguredProcess.log files will be used</param>
         </member>
         <member name="M:CommonSenseSoft.Log.Logging.SendSMTP(System.String,System.String,System.String,CommonSenseSoft.Log.MailPriority,System.String@,System.Boolean,System.String,System.String,System.String,System.Text.Encoding,System.Collections.ArrayList)">
             <summary>
