@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright 2000-2015")]
 [assembly: AssemblyTrademark("CommonSenseSoft.com")]
 [assembly: AssemblyCulture("")]		
- 
+
 //
 // Version information for an assembly consists of the following four values:
 //

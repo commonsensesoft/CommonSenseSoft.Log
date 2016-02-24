@@ -1382,12 +1382,13 @@ namespace CommonSenseSoft.Log{
 		/// </summary>
 		public static void CheckProcessMemory(){
 			if(_intProcessMemoryThresholdKb<=0)return;
-			long lngNonPaged=System.Diagnostics.Process.GetCurrentProcess().NonpagedSystemMemorySize64/1024;
-			long lngPaged=System.Diagnostics.Process.GetCurrentProcess().PagedSystemMemorySize64/1024;
-			Logging.LogMessage("Process' NonPaged memory="+lngNonPaged.ToString()+"K, Paged memory="+lngPaged.ToString()+"K, Threads="
-			+System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString(),LogLevels.Information);
-			if(lngNonPaged>_intProcessMemoryThresholdKb) {
-				Logging.LogMessage("Process has exceeded Memory threshhold. Currently NonPaged memory="+lngNonPaged.ToString()+"K, Paged memory="+lngPaged.ToString()+"K",true,LogLevels.Warnings);
+			System.Diagnostics.Process P=System.Diagnostics.Process.GetCurrentProcess();
+            long lngRamUsed=P.WorkingSet64/1024;
+			long lngVmUsed=P.PrivateMemorySize64/1024;
+            Logging.Info("Process' RAM use="+lngRamUsed.ToString("###,###,###,###,###,##0")+"Kb, Working Set="+lngVmUsed.ToString("###,###,###,###,###,##0")
+			+"Kb, Threads="+System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString());
+			if(lngVmUsed>_intProcessMemoryThresholdKb) {
+				Logging.LogMessage("Process has exceeded Memory threshhold. RAM use="+lngRamUsed.ToString("###,###,###,###,###,##0")+"Kb, Working Set="+lngVmUsed.ToString("###,###,###,###,###,##0")+"Kb",true,LogLevels.Warnings);
 			}
 		}
 		#endregion
@@ -1635,22 +1636,39 @@ namespace CommonSenseSoft.Log{
 				switch(e.GetType().FullName){
 					#region SqlException
 					case "System.Data.SqlClient.SqlException":
-						System.Data.SqlClient.SqlException SQLEx = (System.Data.SqlClient.SqlException)e.GetBaseException();
-						if(SQLEx!=null){
-							for(int i=0;i<SQLEx.Errors.Count;i++){
-								//The Data Provider keeps complaining about the same line with more useful messages. Skip them
-								if(SQLEx.Errors[i].LineNumber!=intLineNumber){
-									intLineNumber=SQLEx.Errors[i].LineNumber;
-									if(i!=0){
-										sb.Append("EventMetadata=[");sb.Append(SQLEx.Errors[i].Message);sb.Append("], ");
+						switch(e.GetBaseException().GetType().FullName){
+							case "System.Data.SqlClient.SqlException":
+								System.Data.SqlClient.SqlException SQLEx = (System.Data.SqlClient.SqlException)e.GetBaseException();
+								if(SQLEx!=null){
+									for(int i=0;i<SQLEx.Errors.Count;i++){
+										//The Data Provider keeps complaining about the same line with more useful messages. Skip them
+										if(SQLEx.Errors[i].LineNumber!=intLineNumber){
+											intLineNumber=SQLEx.Errors[i].LineNumber;
+											if(i!=0){
+												sb.Append("EventMetadata=[");sb.Append(SQLEx.Errors[i].Message);sb.Append("], ");
+											}
+											sb.Append("Procedure=[");sb.Append(SQLEx.Errors[i].Procedure);sb.Append("], Line=[");
+											sb.Append(SQLEx.Errors[i].LineNumber);sb.AppendLine("]");
+											sb.Append("CLASS=");sb.Append(SQLEx.Class.ToString());sb.Append(" \tSTATE=");
+											sb.Append(SQLEx.State.ToString());sb.Append(" \tNUMBER=");sb.AppendLine(SQLEx.Number.ToString());
+										}
 									}
-									sb.Append("Procedure=[");sb.Append(SQLEx.Errors[i].Procedure);sb.Append("], Line=[");
-									sb.Append(SQLEx.Errors[i].LineNumber);sb.AppendLine("]");
-									sb.Append("CLASS=");sb.Append(SQLEx.Class.ToString());sb.Append(" \tSTATE=");
-									sb.Append(SQLEx.State.ToString());sb.Append(" \tNUMBER=");sb.AppendLine(SQLEx.Number.ToString());
+									SQLEx=null;
 								}
-							}
-							SQLEx=null;
+							break;
+							case "System.ComponentModel.Win32Exception":
+								System.ComponentModel.Win32Exception Win32Ex=(System.ComponentModel.Win32Exception)e.GetBaseException();
+								if(Win32Ex!=null){
+									foreach(System.Collections.Generic.KeyValuePair<object,object> Pair in Win32Ex.Data){
+										sb.Append("[");
+										sb.Append((Pair.Key==null)?"NULL":Pair.Key.ToString());
+										sb.Append("]=[");
+										sb.Append((Pair.Value==null)?"NULL":Pair.Value.ToString());
+										sb.AppendLine("]");
+									}
+									Win32Ex=null;
+								}
+							break;
 						}
 					break;
 					#endregion
@@ -1860,21 +1878,6 @@ namespace CommonSenseSoft.Log{
 		#endregion
 
 		#endregion
-
-/*		
-		#region ExtractOriginalMessage
-		/// <summary>
-		/// This component does a great job to show all the information relevant to the exception message.
-		/// Sometimes, up-to the stack you need the original Message, perhaps to show it to user.
-		/// </summary>
-		/// <param name="e">Exception to extract the original message from</param>
-		/// <returns>Substring representing the original message</returns>
-		public static string ExtractOriginalMessage(Exception e){
-			string str=UTILS.Remove_L(e.Message,Environment.NewLine);
-			return UTILS.Remove_R_All(str,EXCEPTION_DETAILS_DELIMITER).TrimEnd();
-		}
-		#endregion
-*/
 		
 		#region enuBlankLines
 		/// <summary>
